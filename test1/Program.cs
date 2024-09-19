@@ -16,8 +16,9 @@ namespace test1
     {
         static void Main(string[] args)
         {
-            User u1 = new User();   
-            ChromeBot ch1 = new ChromeBot(u1, 1500);
+
+            User u1 = new User();
+            ChromeBot ch1 = new ChromeBot(u1, 1000);
             ch1.TakeTheQuiz();
         }
         //1PTP335786

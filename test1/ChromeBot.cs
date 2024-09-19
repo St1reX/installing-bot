@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using CsvHelper;
 using System.Globalization;
+using System.Collections;
+using CsvHelper.Configuration;
 
 namespace test1
 {
@@ -29,6 +31,12 @@ namespace test1
         {
             try
             {
+                FetchDictionaryCSV();
+                //foreach (var item in answers)
+                //{
+                //    Console.WriteLine(item.Key, item.Value);
+                //}
+                //return;
                 LoginUser();
                     
                 IWebElement startSessionButton = ChromeInstance.FindElement(By.ClassName("btn-session"));
@@ -79,6 +87,7 @@ namespace test1
 
                         dictionaryValue = ChromeInstance.FindElement(By.Id("word")).Text;
                         answers.Add(dictionaryKey, dictionaryValue);
+                        SaveWordCSV(dictionaryKey, dictionaryValue);
 
                         nextWordButton.Click();
                         Wait(Interval);
@@ -87,7 +96,6 @@ namespace test1
 
                 ChromeInstance.FindElement(By.Id("return_mainpage")).Click();
                 DisplayDictionary();
-                SaveDictionaryCSV();
             }
             catch (Exception ex)
             {
@@ -181,29 +189,82 @@ namespace test1
             }
         }
 
-        void SaveDictionaryCSV()
+        void FetchDictionaryCSV()
         {
-            string dictionaryPath = "C:\\Users\\uryga\\Desktop\\dictionary.csv";
+            string directoryPath = Path.Combine("C:\\Users\\uryga\\Documents\\GitHub\\installing-bot", "csv");
+
             StreamReader reader;
-            StreamWriter writer;
-
-            CsvWriter csvWriter;
             CsvReader csvReader;
-
-            if (File.Exists(dictionaryPath))
+            CsvConfiguration config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
+                HasHeaderRecord = false,
+            };
+
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+
+                directoryPath = Path.Combine(directoryPath, "dictionary.csv");
+
+                using (File.Create(directoryPath)) { }
 
             }
             else
             {
-                using (File.Create(dictionaryPath)) { }
-
-                using (writer = new StreamWriter(dictionaryPath))
-                using  (csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                directoryPath = Path.Combine(directoryPath, "dictionary.csv");
+                using (reader = new StreamReader(directoryPath, new System.Text.UTF8Encoding(true)))
                 {
-                    csvWriter.WriteRecords(answers);
-                }
+                    using(csvReader = new CsvReader(reader, CultureInfo.CurrentCulture))
+                    {
+                        var records = csvReader.GetRecords<dynamic>();
 
+                        foreach (var record in records)
+                        {
+                            // Uzyskiwanie dostępu do właściwości dynamicznych
+                            var word = record.Key; // Zakładając, że w CSV jest kolumna "Word"
+                            var translation = record.Value; // Zakładając, że w CSV jest kolumna "Translation"
+
+                            Console.WriteLine($"Word: {word}, Translation: {translation}");
+                        }
+                    }
+                }
+            }
+        }
+
+        void SaveWordCSV(string word, string translation)
+        {
+            Dictionary<string, string> tmp = new Dictionary<string, string>();
+            tmp.Add(word, translation);
+
+            string directoryPath = Path.Combine("C:\\Users\\uryga\\Documents\\GitHub\\installing-bot", "csv", "dictionary.csv");
+
+            StreamWriter writer;
+            CsvWriter csvWriter;
+            CsvConfiguration config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                HasHeaderRecord = false,
+            };
+
+            using (var reader = new StreamReader(directoryPath))
+            {
+                // Odczytanie pierwszego wiersza
+                string firstLine = reader.ReadLine();
+                if (string.IsNullOrEmpty(firstLine) || !firstLine.StartsWith("Key,Value"))
+                {
+                    // Jeśli nie ma nagłówków, dodaj je
+                    using (writer = new StreamWriter(directoryPath, false, new System.Text.UTF8Encoding(true)))
+                    {
+                        writer.WriteLine("Key,Value");
+                    }
+                }
+            }
+
+            using (writer = new StreamWriter(directoryPath, true, new System.Text.UTF8Encoding(true))) 
+            {
+                using(csvWriter = new CsvWriter(writer, config))
+                {
+                    csvWriter.WriteRecords(tmp);
+                }
             }
         }
 

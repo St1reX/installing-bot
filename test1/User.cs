@@ -13,10 +13,13 @@ namespace test1
 
         public User()
         {
-            Console.WriteLine("Enter you Installing login: ");
-            Login = Console.ReadLine();
-            Console.WriteLine("Enter you Installing login: ");
-            Password = Console.ReadLine();
+            //Console.WriteLine("Enter you Installing login: ");
+            //Login = Console.ReadLine();
+            //Console.WriteLine("Enter you Installing login: ");
+            //Password = Console.ReadLine();
+
+            Login = "1PTP335786";
+            Password = "mdnnb";
         }
     }
 }
