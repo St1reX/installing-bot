@@ -103,6 +103,23 @@ namespace test1
 
         }
 
+        void CreateChromeInstance(params string[] chromeStartOption)
+        {
+            try
+            {
+                ChromeOptions options = new ChromeOptions();
+                options.AddArguments(chromeStartOption);
+
+                ChromeInstance = new ChromeDriver(options);
+                ChromeInstance.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Failed to initialize ChromeDriver: " + ex.Message);
+                throw;
+            }
+        }
+
         void LoginUser()
         {
             try
@@ -149,20 +166,108 @@ namespace test1
             }
         }
 
-        void CreateChromeInstance(params string[] chromeStartOption)
+        void FetchDictionaryCSV()
         {
+            string directoryPath = Path.Combine("C:\\Users\\uryga\\Documents\\GitHub\\installing-bot", "csv");
+
+            StreamReader reader;
+            CsvReader csvReader;
+            CsvConfiguration config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                HasHeaderRecord = false,
+            };
+
             try
             {
-                ChromeOptions options = new ChromeOptions();
-                options.AddArguments(chromeStartOption);
+                if (!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                    directoryPath = Path.Combine(directoryPath, "dictionary.csv");
 
-                ChromeInstance = new ChromeDriver(options);
-                ChromeInstance.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+                    using (File.Create(directoryPath))
+                    {
+                        // Plik został utworzony, ale jest pusty
+                    }
+                }
+                else
+                {
+                    directoryPath = Path.Combine(directoryPath, "dictionary.csv");
+                    using (reader = new StreamReader(directoryPath, new System.Text.UTF8Encoding(true)))
+                    {
+                        using (csvReader = new CsvReader(reader, CultureInfo.InvariantCulture))
+                        {
+                            var records = csvReader.GetRecords<dynamic>();
+                            string word = "";
+                            string translation = "";
+
+                            foreach (var record in records)
+                            {
+                                foreach (var field in record)
+                                {
+                                    if (field.Key == "Key")
+                                    {
+                                        word = field.Value;
+                                    }
+                                    else
+                                    {
+                                        translation = field.Value;
+                                    }
+                                }
+                                answers.Add(word, translation); // Dodanie słowa i tłumaczenia do słownika
+                            }
+                        }
+                    }
+                }
+            }
+            catch (IOException ioEx)
+            {
+                Console.WriteLine($"Error ocurred during operations with file: {ioEx.Message}");
+            }
+            catch (UnauthorizedAccessException unAuthEx)
+            {
+                Console.WriteLine($"Access to the file is denied: {unAuthEx.Message}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Failed to initialize ChromeDriver: " + ex.Message);
-                throw;
+                Console.WriteLine($"Unexpected error ocurred: {ex.Message}");
+            }
+        }
+
+        void SaveWordCSV(string word, string translation)
+        {
+            Dictionary<string, string> tmp = new Dictionary<string, string>();
+            tmp.Add(word, translation);
+
+            string directoryPath = Path.Combine("C:\\Users\\uryga\\Documents\\GitHub\\installing-bot", "csv", "dictionary.csv");
+
+            StreamWriter writer;
+            CsvWriter csvWriter;
+            CsvConfiguration config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                HasHeaderRecord = false,
+            };
+
+            try
+            {
+                using (writer = new StreamWriter(directoryPath, true, new System.Text.UTF8Encoding(true)))
+                {
+                    using (csvWriter = new CsvWriter(writer, config))
+                    {
+                        csvWriter.WriteRecords(tmp);
+                    }
+                }
+            }
+            catch (IOException ioEx)
+            {
+                Console.WriteLine($"Error occured during the writing word to file: {ioEx.Message}");
+            }
+            catch (UnauthorizedAccessException unAuthEx)
+            {
+                Console.WriteLine($"Access to the file is denied:: {unAuthEx.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Unexpected error ocurred: {ex.Message}");
             }
         }
 
@@ -181,81 +286,6 @@ namespace test1
                 }
             }
 
-        }
-
-        void FetchDictionaryCSV()
-        {
-            string directoryPath = Path.Combine("C:\\Users\\uryga\\Documents\\GitHub\\installing-bot", "csv");
-
-            StreamReader reader;
-            CsvReader csvReader;
-            CsvConfiguration config = new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                HasHeaderRecord = false,
-            };
-
-            if (!Directory.Exists(directoryPath))
-            {
-                Directory.CreateDirectory(directoryPath);
-
-                directoryPath = Path.Combine(directoryPath, "dictionary.csv");
-
-                using (File.Create(directoryPath)) { }
-
-            }
-            else
-            {
-                directoryPath = Path.Combine(directoryPath, "dictionary.csv");
-                using (reader = new StreamReader(directoryPath, new System.Text.UTF8Encoding(true)))
-                {
-                    using(csvReader = new CsvReader(reader, CultureInfo.InvariantCulture))
-                    {
-                        var records = csvReader.GetRecords<dynamic>();
-                        string word = "";
-                        string translation = ""; 
-
-                        foreach (var record in records)
-                        {
-                            foreach(var field in record)
-                            {
-                                if(field.Key == "Key")
-                                {
-                                    word = field.Value;
-                                }
-                                else
-                                {
-                                    translation = field.Value;
-                                }
-                            }
-
-                            answers.Add(word, translation);
-                        }
-                    }
-                }
-            }
-        }
-
-        void SaveWordCSV(string word, string translation)
-        {
-            Dictionary<string, string> tmp = new Dictionary<string, string>();
-            tmp.Add(word, translation);
-
-            string directoryPath = Path.Combine("C:\\Users\\uryga\\Documents\\GitHub\\installing-bot", "csv", "dictionary.csv");
-
-            StreamWriter writer;
-            CsvWriter csvWriter;
-            CsvConfiguration config = new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                HasHeaderRecord = false,
-            };
-
-            using (writer = new StreamWriter(directoryPath, true, new System.Text.UTF8Encoding(true))) 
-            {
-                using(csvWriter = new CsvWriter(writer, config))
-                {
-                    csvWriter.WriteRecords(tmp);
-                }
-            }
         }
 
         void Wait(int seconds)

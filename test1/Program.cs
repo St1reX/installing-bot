@@ -23,5 +23,7 @@ namespace test1
         }
         //1PTP335786
         //mdnnb
+
+        //MONITOR DLA ZGREDKA Z JAWORZNEJ
     }
 }
