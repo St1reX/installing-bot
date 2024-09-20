@@ -18,7 +18,6 @@ namespace test1
         User User { get; set; }
         int Interval {  get; set; }
         Dictionary<string, string> answers = new Dictionary<string, string>();
-
         ChromeDriver ChromeInstance { get; set; }
 
         public ChromeBot(User user, int interval) 
@@ -32,11 +31,7 @@ namespace test1
             try
             {
                 FetchDictionaryCSV();
-                //foreach (var item in answers)
-                //{
-                //    Console.WriteLine(item.Key, item.Value);
-                //}
-                //return;
+
                 LoginUser();
                     
                 IWebElement startSessionButton = ChromeInstance.FindElement(By.ClassName("btn-session"));
@@ -53,18 +48,17 @@ namespace test1
                 string dictionaryKey = "";
                 string dictionaryValue = "";
 
-                Wait(Interval);
 
                 while (!ChromeInstance.FindElement(By.Id("return_mainpage")).Displayed)
                 {
-                   
+                    Wait(2000);
+
                     if (ChromeInstance.FindElement(By.Id("new_word_form")).Displayed)
                     {
                         ChromeInstance.FindElement(By.Id("know_new")).Click();
-                        Wait(Interval);
 
                         ChromeInstance.FindElement(By.Id("skip")).Click();
-                        Wait(Interval);
+
                         continue;
                     }
 
@@ -77,24 +71,23 @@ namespace test1
                         submitAnswerButton.Click();
 
                         Wait(Interval);
+
                         nextWordButton.Click();
-                        Wait(Interval);
                     }
                     else
                     {
                         submitAnswerButton.Click();
-                        Wait(Interval);
 
                         dictionaryValue = ChromeInstance.FindElement(By.Id("word")).Text;
                         answers.Add(dictionaryKey, dictionaryValue);
                         SaveWordCSV(dictionaryKey, dictionaryValue);
 
-                        nextWordButton.Click();
                         Wait(Interval);
+
+                        nextWordButton.Click();
                     }
                 }
 
-                ChromeInstance.FindElement(By.Id("return_mainpage")).Click();
                 DisplayDictionary();
             }
             catch (Exception ex)
@@ -105,7 +98,7 @@ namespace test1
             {
 
                 Console.ReadKey();
-                ChromeInstance.Quit(); // Always close the browser session
+                ChromeInstance.Quit();
             }
 
         }
@@ -117,7 +110,6 @@ namespace test1
                 CreateChromeInstance("--start-maximized", "--disable-search-engine-choice-screen");
 
                 ChromeInstance.Navigate().GoToUrl("https://instaling.pl/teacher.php?page=login");
-                Wait(2000);
 
                 IWebElement DOMElement;
 
@@ -165,6 +157,7 @@ namespace test1
                 options.AddArguments(chromeStartOption);
 
                 ChromeInstance = new ChromeDriver(options);
+                ChromeInstance.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             }
             catch (Exception ex)
             {
@@ -187,6 +180,7 @@ namespace test1
                     Console.WriteLine("Key: " + answer.Key + " Value: " + answer.Value);
                 }
             }
+
         }
 
         void FetchDictionaryCSV()
@@ -214,17 +208,27 @@ namespace test1
                 directoryPath = Path.Combine(directoryPath, "dictionary.csv");
                 using (reader = new StreamReader(directoryPath, new System.Text.UTF8Encoding(true)))
                 {
-                    using(csvReader = new CsvReader(reader, CultureInfo.CurrentCulture))
+                    using(csvReader = new CsvReader(reader, CultureInfo.InvariantCulture))
                     {
                         var records = csvReader.GetRecords<dynamic>();
+                        string word = "";
+                        string translation = ""; 
 
                         foreach (var record in records)
                         {
-                            // Uzyskiwanie dostępu do właściwości dynamicznych
-                            var word = record.Key; // Zakładając, że w CSV jest kolumna "Word"
-                            var translation = record.Value; // Zakładając, że w CSV jest kolumna "Translation"
+                            foreach(var field in record)
+                            {
+                                if(field.Key == "Key")
+                                {
+                                    word = field.Value;
+                                }
+                                else
+                                {
+                                    translation = field.Value;
+                                }
+                            }
 
-                            Console.WriteLine($"Word: {word}, Translation: {translation}");
+                            answers.Add(word, translation);
                         }
                     }
                 }
@@ -244,20 +248,6 @@ namespace test1
             {
                 HasHeaderRecord = false,
             };
-
-            using (var reader = new StreamReader(directoryPath))
-            {
-                // Odczytanie pierwszego wiersza
-                string firstLine = reader.ReadLine();
-                if (string.IsNullOrEmpty(firstLine) || !firstLine.StartsWith("Key,Value"))
-                {
-                    // Jeśli nie ma nagłówków, dodaj je
-                    using (writer = new StreamWriter(directoryPath, false, new System.Text.UTF8Encoding(true)))
-                    {
-                        writer.WriteLine("Key,Value");
-                    }
-                }
-            }
 
             using (writer = new StreamWriter(directoryPath, true, new System.Text.UTF8Encoding(true))) 
             {
