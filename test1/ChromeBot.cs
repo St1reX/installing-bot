@@ -51,7 +51,6 @@ namespace test1
 
                 while (!ChromeInstance.FindElement(By.Id("return_mainpage")).Displayed)
                 {
-                    Wait(2000);
 
                     if (ChromeInstance.FindElement(By.Id("new_word_form")).Displayed)
                     {
@@ -86,6 +85,8 @@ namespace test1
 
                         nextWordButton.Click();
                     }
+
+                    Wait(2000);
                 }
 
                 DisplayDictionary();
