@@ -18,10 +18,12 @@ namespace test1
         {
 
             User u1 = new User();
-            ChromeBot ch1 = new ChromeBot(u1, 1000);
+            ChromeBot ch1 = new ChromeBot(u1, 1000); 
             ch1.TakeTheQuiz();
         }
         //1PTP335786
         //mdnnb
+
+        //MONITOR DLA ZGREDKA Z JAWORZNEJ
     }
 }

@@ -18,7 +18,6 @@ namespace test1
         User User { get; set; }
         int Interval {  get; set; }
         Dictionary<string, string> answers = new Dictionary<string, string>();
-
         ChromeDriver ChromeInstance { get; set; }
 
         public ChromeBot(User user, int interval) 
@@ -32,11 +31,7 @@ namespace test1
             try
             {
                 FetchDictionaryCSV();
-                //foreach (var item in answers)
-                //{
-                //    Console.WriteLine(item.Key, item.Value);
-                //}
-                //return;
+
                 LoginUser();
                     
                 IWebElement startSessionButton = ChromeInstance.FindElement(By.ClassName("btn-session"));
@@ -53,18 +48,16 @@ namespace test1
                 string dictionaryKey = "";
                 string dictionaryValue = "";
 
-                Wait(Interval);
 
                 while (!ChromeInstance.FindElement(By.Id("return_mainpage")).Displayed)
                 {
-                   
+
                     if (ChromeInstance.FindElement(By.Id("new_word_form")).Displayed)
                     {
                         ChromeInstance.FindElement(By.Id("know_new")).Click();
-                        Wait(Interval);
 
                         ChromeInstance.FindElement(By.Id("skip")).Click();
-                        Wait(Interval);
+
                         continue;
                     }
 
@@ -77,24 +70,25 @@ namespace test1
                         submitAnswerButton.Click();
 
                         Wait(Interval);
+
                         nextWordButton.Click();
-                        Wait(Interval);
                     }
                     else
                     {
                         submitAnswerButton.Click();
-                        Wait(Interval);
 
                         dictionaryValue = ChromeInstance.FindElement(By.Id("word")).Text;
                         answers.Add(dictionaryKey, dictionaryValue);
                         SaveWordCSV(dictionaryKey, dictionaryValue);
 
-                        nextWordButton.Click();
                         Wait(Interval);
+
+                        nextWordButton.Click();
                     }
+
+                    Wait(2000);
                 }
 
-                ChromeInstance.FindElement(By.Id("return_mainpage")).Click();
                 DisplayDictionary();
             }
             catch (Exception ex)
@@ -105,9 +99,26 @@ namespace test1
             {
 
                 Console.ReadKey();
-                ChromeInstance.Quit(); // Always close the browser session
+                ChromeInstance.Quit();
             }
 
+        }
+
+        void CreateChromeInstance(params string[] chromeStartOption)
+        {
+            try
+            {
+                ChromeOptions options = new ChromeOptions();
+                options.AddArguments(chromeStartOption);
+
+                ChromeInstance = new ChromeDriver(options);
+                ChromeInstance.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Failed to initialize ChromeDriver: " + ex.Message);
+                throw;
+            }
         }
 
         void LoginUser()
@@ -117,7 +128,6 @@ namespace test1
                 CreateChromeInstance("--start-maximized", "--disable-search-engine-choice-screen");
 
                 ChromeInstance.Navigate().GoToUrl("https://instaling.pl/teacher.php?page=login");
-                Wait(2000);
 
                 IWebElement DOMElement;
 
@@ -157,38 +167,6 @@ namespace test1
             }
         }
 
-        void CreateChromeInstance(params string[] chromeStartOption)
-        {
-            try
-            {
-                ChromeOptions options = new ChromeOptions();
-                options.AddArguments(chromeStartOption);
-
-                ChromeInstance = new ChromeDriver(options);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Failed to initialize ChromeDriver: " + ex.Message);
-                throw;
-            }
-        }
-
-        void DisplayDictionary()
-        {
-            if (answers.Count == 0)
-            {
-                Console.WriteLine("Dictionary is empty");
-                return;
-            }
-            else
-            {
-                foreach (var answer in answers)
-                {
-                    Console.WriteLine("Key: " + answer.Key + " Value: " + answer.Value);
-                }
-            }
-        }
-
         void FetchDictionaryCSV()
         {
             string directoryPath = Path.Combine("C:\\Users\\uryga\\Documents\\GitHub\\installing-bot", "csv");
@@ -200,34 +178,59 @@ namespace test1
                 HasHeaderRecord = false,
             };
 
-            if (!Directory.Exists(directoryPath))
+            try
             {
-                Directory.CreateDirectory(directoryPath);
-
-                directoryPath = Path.Combine(directoryPath, "dictionary.csv");
-
-                using (File.Create(directoryPath)) { }
-
-            }
-            else
-            {
-                directoryPath = Path.Combine(directoryPath, "dictionary.csv");
-                using (reader = new StreamReader(directoryPath, new System.Text.UTF8Encoding(true)))
+                if (!Directory.Exists(directoryPath))
                 {
-                    using(csvReader = new CsvReader(reader, CultureInfo.CurrentCulture))
+                    Directory.CreateDirectory(directoryPath);
+                    directoryPath = Path.Combine(directoryPath, "dictionary.csv");
+
+                    using (File.Create(directoryPath))
                     {
-                        var records = csvReader.GetRecords<dynamic>();
-
-                        foreach (var record in records)
+                        // Plik został utworzony, ale jest pusty
+                    }
+                }
+                else
+                {
+                    directoryPath = Path.Combine(directoryPath, "dictionary.csv");
+                    using (reader = new StreamReader(directoryPath, new System.Text.UTF8Encoding(true)))
+                    {
+                        using (csvReader = new CsvReader(reader, CultureInfo.InvariantCulture))
                         {
-                            // Uzyskiwanie dostępu do właściwości dynamicznych
-                            var word = record.Key; // Zakładając, że w CSV jest kolumna "Word"
-                            var translation = record.Value; // Zakładając, że w CSV jest kolumna "Translation"
+                            var records = csvReader.GetRecords<dynamic>();
+                            string word = "";
+                            string translation = "";
 
-                            Console.WriteLine($"Word: {word}, Translation: {translation}");
+                            foreach (var record in records)
+                            {
+                                foreach (var field in record)
+                                {
+                                    if (field.Key == "Key")
+                                    {
+                                        word = field.Value;
+                                    }
+                                    else
+                                    {
+                                        translation = field.Value;
+                                    }
+                                }
+                                answers.Add(word, translation); // Dodanie słowa i tłumaczenia do słownika
+                            }
                         }
                     }
                 }
+            }
+            catch (IOException ioEx)
+            {
+                Console.WriteLine($"Error ocurred during operations with file: {ioEx.Message}");
+            }
+            catch (UnauthorizedAccessException unAuthEx)
+            {
+                Console.WriteLine($"Access to the file is denied: {unAuthEx.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Unexpected error ocurred: {ex.Message}");
             }
         }
 
@@ -245,27 +248,45 @@ namespace test1
                 HasHeaderRecord = false,
             };
 
-            using (var reader = new StreamReader(directoryPath))
+            try
             {
-                // Odczytanie pierwszego wiersza
-                string firstLine = reader.ReadLine();
-                if (string.IsNullOrEmpty(firstLine) || !firstLine.StartsWith("Key,Value"))
+                using (writer = new StreamWriter(directoryPath, true, new System.Text.UTF8Encoding(true)))
                 {
-                    // Jeśli nie ma nagłówków, dodaj je
-                    using (writer = new StreamWriter(directoryPath, false, new System.Text.UTF8Encoding(true)))
+                    using (csvWriter = new CsvWriter(writer, config))
                     {
-                        writer.WriteLine("Key,Value");
+                        csvWriter.WriteRecords(tmp);
                     }
                 }
             }
-
-            using (writer = new StreamWriter(directoryPath, true, new System.Text.UTF8Encoding(true))) 
+            catch (IOException ioEx)
             {
-                using(csvWriter = new CsvWriter(writer, config))
+                Console.WriteLine($"Error occured during the writing word to file: {ioEx.Message}");
+            }
+            catch (UnauthorizedAccessException unAuthEx)
+            {
+                Console.WriteLine($"Access to the file is denied:: {unAuthEx.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Unexpected error ocurred: {ex.Message}");
+            }
+        }
+
+        void DisplayDictionary()
+        {
+            if (answers.Count == 0)
+            {
+                Console.WriteLine("Dictionary is empty");
+                return;
+            }
+            else
+            {
+                foreach (var answer in answers)
                 {
-                    csvWriter.WriteRecords(tmp);
+                    Console.WriteLine("Key: " + answer.Key + " Value: " + answer.Value);
                 }
             }
+
         }
 
         void Wait(int seconds)
