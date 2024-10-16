@@ -37,10 +37,14 @@ namespace test1
                 IWebElement startSessionButton = ChromeInstance.FindElement(By.ClassName("btn-session"));
                 startSessionButton.Click();
 
+                Wait(2000);
+
                 startSessionButton = (ChromeInstance.FindElement(By.Id("continue_session_button")).Displayed)
                     ? ChromeInstance.FindElement(By.Id("continue_session_button"))
                     : ChromeInstance.FindElement(By.Id("start_session_button"));
                 startSessionButton.Click();
+
+                Wait(2000);
 
                 IWebElement submitAnswerButton = ChromeInstance.FindElement(By.Id("check"));
                 IWebElement nextWordButton = ChromeInstance.FindElement(By.Id("nextword"));
@@ -67,6 +71,7 @@ namespace test1
                     {
                         dictionaryValue = answers[dictionaryKey];
                         answerInput.SendKeys(dictionaryValue);
+
                         submitAnswerButton.Click();
 
                         Wait(Interval);
@@ -77,11 +82,11 @@ namespace test1
                     {
                         submitAnswerButton.Click();
 
+                        Wait(Interval);
+
                         dictionaryValue = ChromeInstance.FindElement(By.Id("word")).Text;
                         answers.Add(dictionaryKey, dictionaryValue);
                         SaveWordCSV(dictionaryKey, dictionaryValue);
-
-                        Wait(Interval);
 
                         nextWordButton.Click();
                     }
@@ -283,7 +288,7 @@ namespace test1
             {
                 foreach (var answer in answers)
                 {
-                    Console.WriteLine("Key: " + answer.Key + " Value: " + answer.Value);
+                    Console.WriteLine("Key: " + answer.Key + " || Value: " + answer.Value);
                 }
             }
 
