@@ -21,8 +21,6 @@ namespace test1
             ChromeBot ch1 = new ChromeBot(u1, 1000); 
             ch1.TakeTheQuiz();
         }
-        //1PTP335786
-        //mdnnb
 
         //MONITOR DLA ZGREDKA Z JAWORZNEJ
     }
