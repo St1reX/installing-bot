@@ -18,8 +18,7 @@ namespace test1
             Console.WriteLine("Enter you Installing login: ");
             Password = Console.ReadLine();
 
-            //Login = "1PTP335786";
-            //Password = "mdnnb";
+            
         }
     }
 }
