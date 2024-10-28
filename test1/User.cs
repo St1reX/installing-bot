@@ -14,9 +14,9 @@ namespace test1
         public User()
         {
             Console.WriteLine("Enter you Installing login: ");
-            Login = Console.ReadLine();
+            Login = "";
             Console.WriteLine("Enter you Installing login: ");
-            Password = Console.ReadLine();
+            Password = "";
 
             
         }

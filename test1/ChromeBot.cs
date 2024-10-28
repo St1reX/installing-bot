@@ -37,14 +37,14 @@ namespace test1
                 IWebElement startSessionButton = ChromeInstance.FindElement(By.ClassName("btn-session"));
                 startSessionButton.Click();
 
-                Wait(2000);
+                Wait(Interval);
 
                 startSessionButton = (ChromeInstance.FindElement(By.Id("continue_session_button")).Displayed)
                     ? ChromeInstance.FindElement(By.Id("continue_session_button"))
                     : ChromeInstance.FindElement(By.Id("start_session_button"));
                 startSessionButton.Click();
 
-                Wait(2000);
+                Wait(Interval);
 
                 IWebElement submitAnswerButton = ChromeInstance.FindElement(By.Id("check"));
                 IWebElement nextWordButton = ChromeInstance.FindElement(By.Id("nextword"));
@@ -60,7 +60,11 @@ namespace test1
                     {
                         ChromeInstance.FindElement(By.Id("know_new")).Click();
 
+                        Wait(Interval);
+
                         ChromeInstance.FindElement(By.Id("skip")).Click();
+
+                        Wait(Interval);
 
                         continue;
                     }
@@ -75,6 +79,11 @@ namespace test1
                         submitAnswerButton.Click();
 
                         Wait(Interval);
+
+                        if(ChromeInstance.FindElements(By.ClassName("red")).Count > 0)
+                        {
+                            answers[dictionaryKey] = ChromeInstance.FindElement(By.Id("word")).Text;
+                        }
 
                         nextWordButton.Click();
                     }
@@ -91,7 +100,7 @@ namespace test1
                         nextWordButton.Click();
                     }
 
-                    Wait(2000);
+                    Wait(Interval);
                 }
 
                 DisplayDictionary();
@@ -117,7 +126,7 @@ namespace test1
                 options.AddArguments(chromeStartOption);
 
                 ChromeInstance = new ChromeDriver(options);
-                ChromeInstance.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+                ChromeInstance.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
             }
             catch (Exception ex)
             {
@@ -133,6 +142,8 @@ namespace test1
                 CreateChromeInstance("--start-maximized", "--disable-search-engine-choice-screen");
 
                 ChromeInstance.Navigate().GoToUrl("https://instaling.pl/teacher.php?page=login");
+
+                Wait(Interval);
 
                 IWebElement DOMElement;
 
@@ -178,10 +189,6 @@ namespace test1
 
             StreamReader reader;
             CsvReader csvReader;
-            CsvConfiguration config = new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                HasHeaderRecord = false,
-            };
 
             try
             {
