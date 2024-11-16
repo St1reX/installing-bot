@@ -23,3 +23,7 @@ C:\Users\uryga\Documents\GitHub\installing-bot\test1\obj\Debug\test1.pdb
 C:\Users\uryga\Documents\GitHub\installing-bot\test1\bin\Debug\CsvHelper.dll
 C:\Users\uryga\Documents\GitHub\installing-bot\test1\bin\Debug\Microsoft.Bcl.HashCode.dll
 C:\Users\uryga\Documents\GitHub\installing-bot\test1\obj\Debug\installi.CF882EDB.Up2Date
+C:\Users\uryga\Documents\GitHub\installing-bot\test1\bin\Debug\test1.exe.manifest
+C:\Users\uryga\Documents\GitHub\installing-bot\test1\bin\Debug\test1.application
+C:\Users\uryga\Documents\GitHub\installing-bot\test1\obj\Debug\test1.exe.manifest
+C:\Users\uryga\Documents\GitHub\installing-bot\test1\obj\Debug\test1.application

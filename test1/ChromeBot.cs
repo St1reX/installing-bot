@@ -37,6 +37,8 @@ namespace test1
                 IWebElement startSessionButton = ChromeInstance.FindElement(By.ClassName("btn-session"));
                 startSessionButton.Click();
 
+                Logger.InfoMessage("Session started.");
+
                 Wait(Interval);
 
                 startSessionButton = (ChromeInstance.FindElement(By.Id("continue_session_button")).Displayed)
@@ -53,11 +55,16 @@ namespace test1
                 string dictionaryValue = "";
 
 
+                Logger.SuccessMessage("All DOM elements found.");
+
+
                 while (!ChromeInstance.FindElement(By.Id("return_mainpage")).Displayed)
                 {
 
                     if (ChromeInstance.FindElement(By.Id("new_word_form")).Displayed)
                     {
+                        Logger.InfoMessage("'LEARN new word' spotted and skipped");
+
                         ChromeInstance.FindElement(By.Id("know_new")).Click();
 
                         Wait(Interval);
@@ -73,6 +80,8 @@ namespace test1
 
                     if (answers.ContainsKey(dictionaryKey))
                     {
+                        Logger.InfoMessage($"KNOWN word: {dictionaryKey} spotted. Trying to complete it...");
+
                         dictionaryValue = answers[dictionaryKey];
                         answerInput.SendKeys(dictionaryValue);
 
@@ -83,12 +92,26 @@ namespace test1
                         if(ChromeInstance.FindElements(By.ClassName("red")).Count > 0)
                         {
                             answers[dictionaryKey] = ChromeInstance.FindElement(By.Id("word")).Text;
+
+                            Logger.ErrorMessage("Saved word wasn't correct answer. Word temporarily changed.");
+                        }
+                        else if(ChromeInstance.FindElements(By.ClassName("blue")).Count > 0)
+                        {
+                            answers[dictionaryKey] = "@SYNONYM@";
+
+                            Logger.InfoMessage("Saved word was a synonym. Word changed to incorrect one in purpose.");
+                        }
+                        else
+                        {
+                            Logger.SuccessMessage("Word solved.");
                         }
 
                         nextWordButton.Click();
                     }
                     else
                     {
+                        Logger.InfoMessage($"Unknown word: {dictionaryKey} spotted. Saving word...");
+
                         submitAnswerButton.Click();
 
                         Wait(Interval);
@@ -102,8 +125,6 @@ namespace test1
 
                     Wait(Interval);
                 }
-
-                DisplayDictionary();
             }
             catch (Exception ex)
             {
@@ -111,9 +132,9 @@ namespace test1
             }
             finally
             {
-
-                Console.ReadKey();
                 ChromeInstance.Quit();
+                Console.Clear();
+                Console.WriteLine($"Session of user {User.Login} ended.");
             }
 
         }
@@ -127,6 +148,8 @@ namespace test1
 
                 ChromeInstance = new ChromeDriver(options);
                 ChromeInstance.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
+
+                Logger.SuccessMessage("Created chrome instance.");
             }
             catch (Exception ex)
             {
@@ -139,7 +162,7 @@ namespace test1
         {
             try
             {
-                CreateChromeInstance("--start-maximized", "--disable-search-engine-choice-screen");
+                CreateChromeInstance("--start-maximized", "--disable-search-engine-choice-screen", "--mute-audio");
 
                 ChromeInstance.Navigate().GoToUrl("https://instaling.pl/teacher.php?page=login");
 
@@ -166,6 +189,10 @@ namespace test1
                     if (!ChromeInstance.Url.Contains("https://instaling.pl/student/pages/mainPage.php"))
                     {
                         throw new Exception("Provided login data is incorrect. Please open the program again and provide correct and current login data.");
+                    }
+                    else
+                    {
+                        Logger.SuccessMessage($"User {User.Login} logged in.");
                     }
                 }
                 else if (!ChromeInstance.Url.Contains("https://instaling.pl/student/pages/mainPage.php?student_id="))
@@ -230,6 +257,8 @@ namespace test1
                             }
                         }
                     }
+
+                    Logger.SuccessMessage("Dictionary fetched.");
                 }
             }
             catch (IOException ioEx)
@@ -269,6 +298,8 @@ namespace test1
                         csvWriter.WriteRecords(tmp);
                     }
                 }
+
+                Logger.SuccessMessage($"Added new word {word} -- {translation}.");
             }
             catch (IOException ioEx)
             {
@@ -284,7 +315,7 @@ namespace test1
             }
         }
 
-        void DisplayDictionary()
+        public void DisplayDictionary()
         {
             if (answers.Count == 0)
             {
@@ -298,6 +329,9 @@ namespace test1
                     Console.WriteLine("Key: " + answer.Key + " || Value: " + answer.Value);
                 }
             }
+
+            Console.WriteLine("Press any key to exit program.");
+            Console.ReadKey();
 
         }
 
