@@ -16,10 +16,11 @@ namespace test1
     {
         static void Main(string[] args)
         {
-            User Uryga = new User("", "");
-            ChromeBot UrygaSession = new ChromeBot(Uryga, 2000);
-            UrygaSession.TakeTheQuiz();
+            DictionaryManagment dictionaryInstance = DictionaryManagment.CreateInstance();
 
+            User Uryga = new User();
+            ChromeBot UrygaSession = new ChromeBot(Uryga, 2000, dictionaryInstance);
+            UrygaSession.TakeTheQuiz();
 
 
             Console.WriteLine("WORDS DICTIONARY (HI HITLA!)");
