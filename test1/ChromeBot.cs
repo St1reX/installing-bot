@@ -36,7 +36,7 @@ namespace test1
             {
                 LoginUser();
 
-                if(ChromeInstance.FindElement(By.TagName("h4")).Displayed)
+                if(ChromeInstance.FindElements(By.TagName("h4")).Count != 0)
                 {
                     Logger.InfoMessage("Todays session already completed. Skipping user...");
                     return;
@@ -71,7 +71,7 @@ namespace test1
 
                     if (ChromeInstance.FindElement(By.Id("new_word_form")).Displayed)
                     {
-                        Logger.InfoMessage("LEARN new word site spotted and skipped");
+                        Logger.InfoMessage("LEARN new word site spotted and skipped.");
 
                         ChromeInstance.FindElement(By.Id("know_new")).Click();
 
@@ -103,11 +103,11 @@ namespace test1
 
                             if (synonym)
                             {
-                                Logger.ErrorMessage($"Synonym temporarily changed to the word provided by installing {dictionaryValue}.");
+                                Logger.ErrorMessage($"Synonym temporarily changed to the word provided by installing: {Answers[dictionaryKey]}.");
                             }
                             else
                             {
-                                Logger.ErrorMessage($"Provided word was incorrect. Temporarily changing word to the one provided by installing {dictionaryValue}.");
+                                Logger.ErrorMessage($"Provided word was incorrect. Temporarily changing word to the one provided by installing: {Answers[dictionaryKey]}.");
                             }
                         }
                         else if(ChromeInstance.FindElements(By.ClassName("blue")).Count > 0)
