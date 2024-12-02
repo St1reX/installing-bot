@@ -7,8 +7,8 @@
       "RelativeMoniker": "D:0:0:{8F42DAAA-4FBE-4835-B0A5-182B6A10A395}|test1\\installing-bot.csproj|solutionrelative:test1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8F42DAAA-4FBE-4835-B0A5-182B6A10A395}|test1\\installing-bot.csproj|C:\\Users\\uryga\\Documents\\GitHub\\installing-bot\\test1\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8F42DAAA-4FBE-4835-B0A5-182B6A10A395}|test1\\installing-bot.csproj|solutionrelative:test1\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8F42DAAA-4FBE-4835-B0A5-182B6A10A395}|test1\\installing-bot.csproj|C:\\Users\\uryga\\Documents\\GitHub\\installing-bot\\test1\\logger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8F42DAAA-4FBE-4835-B0A5-182B6A10A395}|test1\\installing-bot.csproj|solutionrelative:test1\\logger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8F42DAAA-4FBE-4835-B0A5-182B6A10A395}|test1\\installing-bot.csproj|C:\\Users\\uryga\\Documents\\GitHub\\installing-bot\\test1\\dictionarymanagment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,8 +19,8 @@
       "RelativeMoniker": "D:0:0:{8F42DAAA-4FBE-4835-B0A5-182B6A10A395}|test1\\installing-bot.csproj|solutionrelative:test1\\chromebot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8F42DAAA-4FBE-4835-B0A5-182B6A10A395}|test1\\installing-bot.csproj|C:\\Users\\uryga\\Documents\\GitHub\\installing-bot\\test1\\logger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8F42DAAA-4FBE-4835-B0A5-182B6A10A395}|test1\\installing-bot.csproj|solutionrelative:test1\\logger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8F42DAAA-4FBE-4835-B0A5-182B6A10A395}|test1\\installing-bot.csproj|C:\\Users\\uryga\\Documents\\GitHub\\installing-bot\\test1\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8F42DAAA-4FBE-4835-B0A5-182B6A10A395}|test1\\installing-bot.csproj|solutionrelative:test1\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +34,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "Logger.cs",
               "DocumentMoniker": "C:\\Users\\uryga\\Documents\\GitHub\\installing-bot\\test1\\Logger.cs",
               "RelativeDocumentMoniker": "test1\\Logger.cs",
@@ -51,9 +51,9 @@
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\uryga\\Documents\\GitHub\\installing-bot\\test1\\Program.cs",
               "RelativeDocumentMoniker": "test1\\Program.cs",
-              "ToolTip": "C:\\Users\\uryga\\Documents\\GitHub\\installing-bot\\test1\\Program.cs*",
-              "RelativeToolTip": "test1\\Program.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAiAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\uryga\\Documents\\GitHub\\installing-bot\\test1\\Program.cs",
+              "RelativeToolTip": "test1\\Program.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABQAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-19T08:05:40.556Z",
               "EditorCaption": ""
@@ -66,7 +66,7 @@
               "RelativeDocumentMoniker": "test1\\DictionaryManagment.cs",
               "ToolTip": "C:\\Users\\uryga\\Documents\\GitHub\\installing-bot\\test1\\DictionaryManagment.cs",
               "RelativeToolTip": "test1\\DictionaryManagment.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-26T20:59:37.475Z",
               "EditorCaption": ""
@@ -79,20 +79,20 @@
               "RelativeDocumentMoniker": "test1\\ChromeBot.cs",
               "ToolTip": "C:\\Users\\uryga\\Documents\\GitHub\\installing-bot\\test1\\ChromeBot.cs",
               "RelativeToolTip": "test1\\ChromeBot.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvw4AAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAJUAAAAAAAAAAAAuwKEAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-19T08:12:05.055Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\uryga\\Documents\\GitHub\\installing-bot\\test1\\User.cs",
               "RelativeDocumentMoniker": "test1\\User.cs",
               "ToolTip": "C:\\Users\\uryga\\Documents\\GitHub\\installing-bot\\test1\\User.cs",
               "RelativeToolTip": "test1\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-19T08:10:25.566Z",
               "EditorCaption": ""

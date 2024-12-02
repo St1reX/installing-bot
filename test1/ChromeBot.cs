@@ -36,12 +36,12 @@ namespace test1
             {
                 LoginUser();
 
-                if(ChromeInstance.FindElements(By.TagName("h4")).Count != 0)
+                if (ChromeInstance.FindElements(By.TagName("h4")).Count != 0)
                 {
                     Logger.InfoMessage("Todays session already completed. Skipping user...");
                     return;
                 }
-                    
+
                 IWebElement startSessionButton = ChromeInstance.FindElement(By.ClassName("btn-session"));
                 startSessionButton.Click();
 
@@ -62,6 +62,7 @@ namespace test1
                 string dictionaryKey = "";
                 string dictionaryValue = "";
                 bool synonym = false;
+
 
                 Logger.SuccessMessage("All DOM elements found.");
 
@@ -140,6 +141,15 @@ namespace test1
 
                     Wait(Interval);
                 }
+
+
+                IWebElement showStatistics = ChromeInstance.FindElement(By.Id("grade_report_button"));
+                IWebElement weekWorkDays = ChromeInstance.FindElement(By.Id("work_week_days"));
+                showStatistics.Click();
+                Wait(Interval);
+                Console.WriteLine();
+                Logger.InfoMessage($"NUMBER OF WORKING DAYS THIS WEEK: {weekWorkDays.Text}");
+
             }
             catch (Exception ex)
             {
@@ -149,7 +159,7 @@ namespace test1
             {
                 ChromeInstance.Close();
                 Logger.InfoMessage($"Session of user {User.Login} ended.");
-                Console.WriteLine("=========================================================");
+                Console.WriteLine("=======================================================================================");
             }
 
         }

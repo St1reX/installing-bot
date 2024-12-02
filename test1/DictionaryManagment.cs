@@ -19,6 +19,7 @@ namespace test1
         {
             Logger.SuccessMessage("Dictionary instance created successfully.");
             FetchDictionaryCSV();
+            Console.WriteLine("=======================================================================================");
         }
 
         public static DictionaryManagment CreateInstance()

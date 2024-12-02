@@ -22,8 +22,6 @@ namespace test1
             ChromeBot UrygaSession = new ChromeBot(Uryga, 2000, dictionaryInstance);
             UrygaSession.TakeTheQuiz();
 
-            
-
 
             Console.WriteLine("WORDS DICTIONARY (HI HITLA!)");
             UrygaSession.DisplayDictionary();
