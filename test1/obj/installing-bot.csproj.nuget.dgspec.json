@@ -14,6 +14,7 @@
         "outputPath": "C:\\Users\\uryga\\Documents\\GitHub\\installing-bot\\test1\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
+        "UsingMicrosoftNETSdk": false,
         "fallbackFolders": [
           "X:\\Visual Studio\\Shared\\NuGetPackages"
         ],
@@ -53,7 +54,7 @@
             },
             "Selenium.WebDriver.ChromeDriver": {
               "target": "Package",
-              "version": "[129.0.6668.5800, )"
+              "version": "[133.0.6943.5300, )"
             }
           }
         }

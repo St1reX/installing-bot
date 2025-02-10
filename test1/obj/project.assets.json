@@ -89,7 +89,7 @@
           "buildTransitive/Selenium.WebDriver.targets": {}
         }
       },
-      "Selenium.WebDriver.ChromeDriver/129.0.6668.5800": {
+      "Selenium.WebDriver.ChromeDriver/133.0.6943.5300": {
         "type": "package",
         "build": {
           "build/Selenium.WebDriver.ChromeDriver.targets": {}
@@ -334,7 +334,7 @@
           "buildTransitive/Selenium.WebDriver.targets": {}
         }
       },
-      "Selenium.WebDriver.ChromeDriver/129.0.6668.5800": {
+      "Selenium.WebDriver.ChromeDriver/133.0.6943.5300": {
         "type": "package",
         "build": {
           "build/Selenium.WebDriver.ChromeDriver.targets": {}
@@ -579,7 +579,7 @@
           "buildTransitive/Selenium.WebDriver.targets": {}
         }
       },
-      "Selenium.WebDriver.ChromeDriver/129.0.6668.5800": {
+      "Selenium.WebDriver.ChromeDriver/133.0.6943.5300": {
         "type": "package",
         "build": {
           "build/Selenium.WebDriver.ChromeDriver.targets": {}
@@ -824,7 +824,7 @@
           "buildTransitive/Selenium.WebDriver.targets": {}
         }
       },
-      "Selenium.WebDriver.ChromeDriver/129.0.6668.5800": {
+      "Selenium.WebDriver.ChromeDriver/133.0.6943.5300": {
         "type": "package",
         "build": {
           "build/Selenium.WebDriver.ChromeDriver.targets": {}
@@ -1069,7 +1069,7 @@
           "buildTransitive/Selenium.WebDriver.targets": {}
         }
       },
-      "Selenium.WebDriver.ChromeDriver/129.0.6668.5800": {
+      "Selenium.WebDriver.ChromeDriver/133.0.6943.5300": {
         "type": "package",
         "build": {
           "build/Selenium.WebDriver.ChromeDriver.targets": {}
@@ -1399,10 +1399,10 @@
         "selenium.webdriver.nuspec"
       ]
     },
-    "Selenium.WebDriver.ChromeDriver/129.0.6668.5800": {
-      "sha512": "vCTOyOiasQReZr6wq7jDMLoDAEm41VYqSIZFcLDPj/wQx41AgWg+Y4HS+VS1DKZE+nmRZp0oo40gs80n/PtcOw==",
+    "Selenium.WebDriver.ChromeDriver/133.0.6943.5300": {
+      "sha512": "GjO/9ZUgq/sgyZt45Qy3nrhrKWjmU71wf3UaSRDqcGvp/vMelkJDN+49lOWeQvBHnVRSw006ohPjW6JlqQOU5w==",
       "type": "package",
-      "path": "selenium.webdriver.chromedriver/129.0.6668.5800",
+      "path": "selenium.webdriver.chromedriver/133.0.6943.5300",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1419,7 +1419,7 @@
         "driver/win32/LICENSE.chromedriver",
         "driver/win32/chromedriver.exe",
         "nupkg-icon.png",
-        "selenium.webdriver.chromedriver.129.0.6668.5800.nupkg.sha512",
+        "selenium.webdriver.chromedriver.133.0.6943.5300.nupkg.sha512",
         "selenium.webdriver.chromedriver.nuspec"
       ]
     },
@@ -1743,7 +1743,7 @@
     ".NETFramework,Version=v4.7.2": [
       "CsvHelper >= 33.0.1",
       "Selenium.WebDriver >= 4.24.0",
-      "Selenium.WebDriver.ChromeDriver >= 129.0.6668.5800"
+      "Selenium.WebDriver.ChromeDriver >= 133.0.6943.5300"
     ]
   },
   "packageFolders": {
@@ -1760,6 +1760,7 @@
       "outputPath": "C:\\Users\\uryga\\Documents\\GitHub\\installing-bot\\test1\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
+      "UsingMicrosoftNETSdk": false,
       "fallbackFolders": [
         "X:\\Visual Studio\\Shared\\NuGetPackages"
       ],
@@ -1799,7 +1800,7 @@
           },
           "Selenium.WebDriver.ChromeDriver": {
             "target": "Package",
-            "version": "[129.0.6668.5800, )"
+            "version": "[133.0.6943.5300, )"
           }
         }
       }
