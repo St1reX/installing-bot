@@ -138,14 +138,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="System.Text.Json.dll" size="643864">
-      <assemblyIdentity name="System.Text.Json" version="8.0.0.4" publicKeyToken="CC7B13FFCD2DDD51" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="System.Text.Json.dll" size="644888">
+      <assemblyIdentity name="System.Text.Json" version="8.0.0.5" publicKeyToken="CC7B13FFCD2DDD51" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>frIX8KC5/mgd4ohRHLIwcIuxxm4MSoVTucAFhjLP0g8=</dsig:DigestValue>
+        <dsig:DigestValue>hsPyY66bRGmrEmbIBHEIcIJEfrSjjmuXv16E3hXAeh0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -181,47 +181,47 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>nofFPpKoW67mZPALjtJiU36jtV5IPBS58e2+Cz3MxYA=</dsig:DigestValue>
+        <dsig:DigestValue>yHPuB9RwqAm1RJQwiAriddj9yuzjNF7si0hbTKpRBgs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WebDriver.dll" size="4468736">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WebDriver.dll" size="5642240">
       <assemblyIdentity name="WebDriver" version="4.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>JsmuSxzSJNRu9lHeu7+ghi1IyL7Or5/jiRLSampU+Gw=</dsig:DigestValue>
+        <dsig:DigestValue>tmGNhwacDtH8sSc7lSLVcMzuqjyhnFUReR4V4eMDaGg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="selenium-manager\linux\selenium-manager" size="5417280">
+  <file name="selenium-manager\linux\selenium-manager" size="5422816">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>tTSAJ5sjIux7V82qpNgoxpnd221ggDyzB3D2/1mnTLs=</dsig:DigestValue>
+      <dsig:DigestValue>CyVrY6/+kBPJJrxHe/5DRlNUlEA+nP4zjPqd0UqkL48=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="selenium-manager\macos\selenium-manager" size="8186400">
+  <file name="selenium-manager\macos\selenium-manager" size="8076960">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>qMDFXR5Yy4TCrGkcRpu5iBgcwHfN3tOVCTNj/KRVCU4=</dsig:DigestValue>
+      <dsig:DigestValue>gWvlupbesyG2sOEJpZ1rjJ/wGU8rMgTxgBrZbBkOz9U=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="selenium-manager\windows\selenium-manager.exe" size="3722752">
+  <file name="selenium-manager\windows\selenium-manager.exe" size="3686912">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>Bwz6lKw+3Yj6PkZ/jpKfk1UWVaff9K1HZzfeAjwrA38=</dsig:DigestValue>
+      <dsig:DigestValue>0alCvT5c21pw6OloP46WTZ1vz1vkcvmjAkUd3JkIQ9k=</dsig:DigestValue>
     </hash>
   </file>
   <file name="test1.exe.config" size="1206">
@@ -230,7 +230,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>2sP+d6tj2eUMGwHcN0lpq6ZACeDxBOwMOWLYQXgyVVQ=</dsig:DigestValue>
+      <dsig:DigestValue>Za5vLh0PTnRvHbzJCawINWDbqbLpodrRvOJPhrde5pA=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

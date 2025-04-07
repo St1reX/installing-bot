@@ -67,10 +67,10 @@
           "lib/net45/_._": {}
         }
       },
-      "Selenium.WebDriver/4.24.0": {
+      "Selenium.WebDriver/4.31.0": {
         "type": "package",
         "dependencies": {
-          "System.Text.Json": "8.0.4"
+          "System.Text.Json": "8.0.5"
         },
         "frameworkAssemblies": [
           "System.Drawing"
@@ -89,7 +89,7 @@
           "buildTransitive/Selenium.WebDriver.targets": {}
         }
       },
-      "Selenium.WebDriver.ChromeDriver/133.0.6943.5300": {
+      "Selenium.WebDriver.ChromeDriver/135.0.7049.4200": {
         "type": "package",
         "build": {
           "build/Selenium.WebDriver.ChromeDriver.targets": {}
@@ -187,7 +187,7 @@
           "buildTransitive/net462/_._": {}
         }
       },
-      "System.Text.Json/8.0.4": {
+      "System.Text.Json/8.0.5": {
         "type": "package",
         "dependencies": {
           "Microsoft.Bcl.AsyncInterfaces": "8.0.0",
@@ -312,10 +312,10 @@
           "lib/net45/_._": {}
         }
       },
-      "Selenium.WebDriver/4.24.0": {
+      "Selenium.WebDriver/4.31.0": {
         "type": "package",
         "dependencies": {
-          "System.Text.Json": "8.0.4"
+          "System.Text.Json": "8.0.5"
         },
         "frameworkAssemblies": [
           "System.Drawing"
@@ -334,7 +334,7 @@
           "buildTransitive/Selenium.WebDriver.targets": {}
         }
       },
-      "Selenium.WebDriver.ChromeDriver/133.0.6943.5300": {
+      "Selenium.WebDriver.ChromeDriver/135.0.7049.4200": {
         "type": "package",
         "build": {
           "build/Selenium.WebDriver.ChromeDriver.targets": {}
@@ -432,7 +432,7 @@
           "buildTransitive/net462/_._": {}
         }
       },
-      "System.Text.Json/8.0.4": {
+      "System.Text.Json/8.0.5": {
         "type": "package",
         "dependencies": {
           "Microsoft.Bcl.AsyncInterfaces": "8.0.0",
@@ -557,10 +557,10 @@
           "lib/net45/_._": {}
         }
       },
-      "Selenium.WebDriver/4.24.0": {
+      "Selenium.WebDriver/4.31.0": {
         "type": "package",
         "dependencies": {
-          "System.Text.Json": "8.0.4"
+          "System.Text.Json": "8.0.5"
         },
         "frameworkAssemblies": [
           "System.Drawing"
@@ -579,7 +579,7 @@
           "buildTransitive/Selenium.WebDriver.targets": {}
         }
       },
-      "Selenium.WebDriver.ChromeDriver/133.0.6943.5300": {
+      "Selenium.WebDriver.ChromeDriver/135.0.7049.4200": {
         "type": "package",
         "build": {
           "build/Selenium.WebDriver.ChromeDriver.targets": {}
@@ -677,7 +677,7 @@
           "buildTransitive/net462/_._": {}
         }
       },
-      "System.Text.Json/8.0.4": {
+      "System.Text.Json/8.0.5": {
         "type": "package",
         "dependencies": {
           "Microsoft.Bcl.AsyncInterfaces": "8.0.0",
@@ -802,10 +802,10 @@
           "lib/net45/_._": {}
         }
       },
-      "Selenium.WebDriver/4.24.0": {
+      "Selenium.WebDriver/4.31.0": {
         "type": "package",
         "dependencies": {
-          "System.Text.Json": "8.0.4"
+          "System.Text.Json": "8.0.5"
         },
         "frameworkAssemblies": [
           "System.Drawing"
@@ -824,7 +824,7 @@
           "buildTransitive/Selenium.WebDriver.targets": {}
         }
       },
-      "Selenium.WebDriver.ChromeDriver/133.0.6943.5300": {
+      "Selenium.WebDriver.ChromeDriver/135.0.7049.4200": {
         "type": "package",
         "build": {
           "build/Selenium.WebDriver.ChromeDriver.targets": {}
@@ -922,7 +922,7 @@
           "buildTransitive/net462/_._": {}
         }
       },
-      "System.Text.Json/8.0.4": {
+      "System.Text.Json/8.0.5": {
         "type": "package",
         "dependencies": {
           "Microsoft.Bcl.AsyncInterfaces": "8.0.0",
@@ -1047,10 +1047,10 @@
           "lib/net45/_._": {}
         }
       },
-      "Selenium.WebDriver/4.24.0": {
+      "Selenium.WebDriver/4.31.0": {
         "type": "package",
         "dependencies": {
-          "System.Text.Json": "8.0.4"
+          "System.Text.Json": "8.0.5"
         },
         "frameworkAssemblies": [
           "System.Drawing"
@@ -1069,7 +1069,7 @@
           "buildTransitive/Selenium.WebDriver.targets": {}
         }
       },
-      "Selenium.WebDriver.ChromeDriver/133.0.6943.5300": {
+      "Selenium.WebDriver.ChromeDriver/135.0.7049.4200": {
         "type": "package",
         "build": {
           "build/Selenium.WebDriver.ChromeDriver.targets": {}
@@ -1167,7 +1167,7 @@
           "buildTransitive/net462/_._": {}
         }
       },
-      "System.Text.Json/8.0.4": {
+      "System.Text.Json/8.0.5": {
         "type": "package",
         "dependencies": {
           "Microsoft.Bcl.AsyncInterfaces": "8.0.0",
@@ -1377,10 +1377,10 @@
         "version.txt"
       ]
     },
-    "Selenium.WebDriver/4.24.0": {
-      "sha512": "pwpNZQPCtDFH07nCliNMT/YRR5NhlPmxsrh/9e7PQsI/TfSUBy/VEdA6QwDY2WybzVZ6SlYSu1bv3cWKkiN8/w==",
+    "Selenium.WebDriver/4.31.0": {
+      "sha512": "RT5Pg6UVyxe/+S/H808VAbfXX4kHQdvo/U28oViwUcCpC4WL7zHq2GgxY/b9zNLTcwJ8zfqu+WmHPifkTx+BCQ==",
       "type": "package",
-      "path": "selenium.webdriver/4.24.0",
+      "path": "selenium.webdriver/4.31.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1395,14 +1395,14 @@
         "manager/linux/selenium-manager",
         "manager/macos/selenium-manager",
         "manager/windows/selenium-manager.exe",
-        "selenium.webdriver.4.24.0.nupkg.sha512",
+        "selenium.webdriver.4.31.0.nupkg.sha512",
         "selenium.webdriver.nuspec"
       ]
     },
-    "Selenium.WebDriver.ChromeDriver/133.0.6943.5300": {
-      "sha512": "GjO/9ZUgq/sgyZt45Qy3nrhrKWjmU71wf3UaSRDqcGvp/vMelkJDN+49lOWeQvBHnVRSw006ohPjW6JlqQOU5w==",
+    "Selenium.WebDriver.ChromeDriver/135.0.7049.4200": {
+      "sha512": "jesl02IzPvgOTrlIZ9HWtKwdfbt5lkrtXo/9upGf1iDqptzttztgeFYN6a0/PHLZgVx8uK8aXaU+xYy0UKbz4w==",
       "type": "package",
-      "path": "selenium.webdriver.chromedriver/133.0.6943.5300",
+      "path": "selenium.webdriver.chromedriver/135.0.7049.4200",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1419,7 +1419,7 @@
         "driver/win32/LICENSE.chromedriver",
         "driver/win32/chromedriver.exe",
         "nupkg-icon.png",
-        "selenium.webdriver.chromedriver.133.0.6943.5300.nupkg.sha512",
+        "selenium.webdriver.chromedriver.135.0.7049.4200.nupkg.sha512",
         "selenium.webdriver.chromedriver.nuspec"
       ]
     },
@@ -1584,10 +1584,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "System.Text.Json/8.0.4": {
-      "sha512": "bAkhgDJ88XTsqczoxEMliSrpijKZHhbJQldhAmObj/RbrN3sU5dcokuXmWJWsdQAhiMJ9bTayWsL1C9fbbCRhw==",
+    "System.Text.Json/8.0.5": {
+      "sha512": "0f1B50Ss7rqxXiaBJyzUu9bWFOO2/zSlifZ/UNMdiIpDYe4cY4LQQicP4nirK1OS31I43rn062UIJ1Q9bpmHpg==",
       "type": "package",
-      "path": "system.text.json/8.0.4",
+      "path": "system.text.json/8.0.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1652,7 +1652,7 @@
         "lib/net8.0/System.Text.Json.xml",
         "lib/netstandard2.0/System.Text.Json.dll",
         "lib/netstandard2.0/System.Text.Json.xml",
-        "system.text.json.8.0.4.nupkg.sha512",
+        "system.text.json.8.0.5.nupkg.sha512",
         "system.text.json.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -1742,8 +1742,8 @@
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.7.2": [
       "CsvHelper >= 33.0.1",
-      "Selenium.WebDriver >= 4.24.0",
-      "Selenium.WebDriver.ChromeDriver >= 133.0.6943.5300"
+      "Selenium.WebDriver >= 4.31.0",
+      "Selenium.WebDriver.ChromeDriver >= 135.0.7049.4200"
     ]
   },
   "packageFolders": {
@@ -1796,11 +1796,11 @@
           },
           "Selenium.WebDriver": {
             "target": "Package",
-            "version": "[4.24.0, )"
+            "version": "[4.31.0, )"
           },
           "Selenium.WebDriver.ChromeDriver": {
             "target": "Package",
-            "version": "[133.0.6943.5300, )"
+            "version": "[135.0.7049.4200, )"
           }
         }
       }

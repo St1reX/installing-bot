@@ -85,7 +85,7 @@ namespace test1
                         continue;
                     }
 
-                    dictionaryKey = ChromeInstance.FindElement(By.ClassName("translations")).Text;
+                    dictionaryKey = ChromeInstance.FindElement(By.ClassName("translation")).Text;
 
                     if (Answers.ContainsKey(dictionaryKey))
                     {
@@ -193,7 +193,7 @@ namespace test1
         {
             try
             {
-                CreateChromeInstance("--start-maximized", "--disable-search-engine-choice-screen", "--mute-audio", "--headless", "--log-level=3");
+                CreateChromeInstance("--start-maximized", "--disable-search-engine-choice-screen", "--headless", "--mute-audio", "--log-level=3");
 
                 ChromeInstance.Navigate().GoToUrl("https://instaling.pl/teacher.php?page=login");
 
