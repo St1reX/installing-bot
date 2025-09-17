@@ -193,7 +193,7 @@ namespace test1
         {
             try
             {
-                CreateChromeInstance("--start-maximized", "--disable-search-engine-choice-screen", "--mute-audio", "--log-level=3");
+                CreateChromeInstance("--start-maximized", "--disable-search-engine-choice-screen", "--headless", "--mute-audio", "--log-level=3");
 
                 ChromeInstance.Navigate().GoToUrl("https://instaling.pl/teacher.php?page=login");
 
