@@ -15,6 +15,10 @@ namespace test1
         private static DictionaryManagment dictionaryInstance;
         public Dictionary<string, string> answers = new Dictionary<string, string>();
 
+        static string projectRoot = Directory.GetParent(AppContext.BaseDirectory)
+                               .Parent.Parent.Parent.FullName;
+        static string directoryPath = Path.Combine(projectRoot, "csv");
+
         private DictionaryManagment()
         {
             Logger.SuccessMessage("Dictionary instance created successfully.");
@@ -33,10 +37,6 @@ namespace test1
 
         void FetchDictionaryCSV()
         {
-            string projectRoot = Directory.GetParent(AppContext.BaseDirectory)
-                               .Parent.Parent.Parent.FullName;
-            string directoryPath = Path.Combine(projectRoot, "csv");
-
             StreamReader reader;
             CsvReader csvReader;
 
@@ -103,8 +103,6 @@ namespace test1
             Dictionary<string, string> tmp = new Dictionary<string, string>();
             tmp.Add(word, translation);
 
-            string directoryPath = Path.Combine("C:\\Users\\uryga\\Documents\\GitHub\\installing-bot", "csv", "dictionary.csv");
-
             StreamWriter writer;
             CsvWriter csvWriter;
             CsvConfiguration config = new CsvConfiguration(CultureInfo.InvariantCulture)
@@ -137,7 +135,6 @@ namespace test1
                 Logger.ErrorMessage($"Unexpected error ocurred: {ex.Message}");
             }
         }
-
 
     }
 }

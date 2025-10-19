@@ -15,7 +15,7 @@ namespace test1
 
             Console.Write("Enter your Installing password: ");
             this.Password = Password == null ? Console.ReadLine() : Password;
-            Console.Write($"{this.Password}");
+            Console.Write($"{this.Password} \n");
 
         }
     }

@@ -26,12 +26,9 @@ namespace test1
             ChromeBot WańczykSession = new ChromeBot(Wańczyk, 2000, dictionaryInstance);
             WańczykSession.TakeTheQuiz();
 
-
             User Gocal = new User("1PTP70798", "eicrw");
             ChromeBot GocalSession = new ChromeBot(Gocal, 2000, dictionaryInstance);
             GocalSession.TakeTheQuiz();
-
-
 
             Console.WriteLine("WORDS DICTIONARY (HI HITLA!)");
             UrygaSession.DisplayDictionary();

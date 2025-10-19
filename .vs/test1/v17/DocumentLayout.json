@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\uryga\\source\\repos\\St1reX\\installing-bot\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{8F42DAAA-4FBE-4835-B0A5-182B6A10A395}|test1\\installing-bot.csproj|c:\\users\\uryga\\source\\repos\\st1rex\\installing-bot\\test1\\dictionarymanagment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8F42DAAA-4FBE-4835-B0A5-182B6A10A395}|test1\\installing-bot.csproj|solutionrelative:test1\\dictionarymanagment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8F42DAAA-4FBE-4835-B0A5-182B6A10A395}|test1\\installing-bot.csproj|c:\\users\\uryga\\source\\repos\\st1rex\\installing-bot\\test1\\chromebot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8F42DAAA-4FBE-4835-B0A5-182B6A10A395}|test1\\installing-bot.csproj|solutionrelative:test1\\chromebot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -14,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -22,7 +26,11 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Bookmark",
@@ -31,14 +39,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "DictionaryManagment.cs",
+              "DocumentMoniker": "C:\\Users\\uryga\\source\\repos\\St1reX\\installing-bot\\test1\\DictionaryManagment.cs",
+              "RelativeDocumentMoniker": "test1\\DictionaryManagment.cs",
+              "ToolTip": "C:\\Users\\uryga\\source\\repos\\St1reX\\installing-bot\\test1\\DictionaryManagment.cs*",
+              "RelativeToolTip": "test1\\DictionaryManagment.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAASwBQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T17:15:53.629Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "ChromeBot.cs",
               "DocumentMoniker": "C:\\Users\\uryga\\source\\repos\\St1reX\\installing-bot\\test1\\ChromeBot.cs",
               "RelativeDocumentMoniker": "test1\\ChromeBot.cs",
               "ToolTip": "C:\\Users\\uryga\\source\\repos\\St1reX\\installing-bot\\test1\\ChromeBot.cs",
               "RelativeToolTip": "test1\\ChromeBot.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAPAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAA5wDoAAABcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T08:12:05.055Z",
+              "WhenOpened": "2025-10-19T17:05:03.668Z",
               "EditorCaption": ""
             }
           ]
