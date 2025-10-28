@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
-using CsvHelper;
 using System.Globalization;
 using System.IO;
 

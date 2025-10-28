@@ -1,15 +1,8 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System.IO;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CsvHelper;
-using System.Globalization;
-using System.Collections;
-using CsvHelper.Configuration;
+
 
 namespace test1
 {

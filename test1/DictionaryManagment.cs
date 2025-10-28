@@ -1,12 +1,8 @@
-﻿using CsvHelper;
-using CsvHelper.Configuration;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using CSVFile;
 
 namespace test1
 {
@@ -18,6 +14,7 @@ namespace test1
         static string projectRoot = Directory.GetParent(AppContext.BaseDirectory)
                                .Parent.Parent.Parent.FullName;
         static string directoryPath = Path.Combine(projectRoot, "csv");
+        static string filePath = Path.Combine(directoryPath, "dictionary.csv");
 
         private DictionaryManagment()
         {
@@ -37,56 +34,58 @@ namespace test1
 
         void FetchDictionaryCSV()
         {
-            StreamReader reader;
-            CsvReader csvReader;
-
             try
             {
                 if (!Directory.Exists(directoryPath))
                 {
                     Directory.CreateDirectory(directoryPath);
-                    directoryPath = Path.Combine(directoryPath, "dictionary.csv");
-
-                    using (File.Create(directoryPath))
-                    {
-                        // Plik został utworzony, ale jest pusty
-                    }
                 }
-                else
-                {
-                    directoryPath = Path.Combine(directoryPath, "dictionary.csv");
-                    using (reader = new StreamReader(directoryPath, new System.Text.UTF8Encoding(true)))
-                    {
-                        using (csvReader = new CsvReader(reader, CultureInfo.InvariantCulture))
-                        {
-                            var records = csvReader.GetRecords<dynamic>();
-                            string word = "";
-                            string translation = "";
 
-                            foreach (var record in records)
-                            {
-                                foreach (var field in record)
-                                {
-                                    if (field.Key == "Key")
-                                    {
-                                        word = field.Value;
-                                    }
-                                    else
-                                    {
-                                        translation = field.Value;
-                                    }
-                                }
-                                answers.Add(word, translation); // Dodanie słowa i tłumaczenia do słownika
-                            }
+                if (!File.Exists(filePath))
+                {
+                    File.Create(filePath).Dispose();
+                    return;
+                }
+
+                using (var reader = new StreamReader(filePath, Encoding.UTF8))
+                {
+                    var settings = new CSVSettings()
+                    {
+                        FieldDelimiter = ';'
+                    };
+                    var csv = new CSVReader(reader, settings);
+
+                    foreach (var row in csv)
+                    {
+                        IList<string> fields = null;
+
+                        try
+                        {
+                            fields = new List<string>();
+                            foreach (var f in (IEnumerable<string>)row)
+                                fields.Add(f);
+                        }
+                        catch
+                        {
+                            continue;
+                        }
+
+                        if (fields.Count >= 2)
+                        {
+                            string key = (fields[0] ?? "").Trim();
+                            string value = (fields[1] ?? "").Trim();
+
+                            if (!string.IsNullOrEmpty(key) && !answers.ContainsKey(key))
+                                answers.Add(key, value);
                         }
                     }
-
-                    Logger.SuccessMessage("Dictionary fetched.");
                 }
+
+                Logger.SuccessMessage("Dictionary fetched.");
             }
             catch (IOException ioEx)
             {
-                Logger.ErrorMessage($"Error ocurred during operations with file: {ioEx.Message}");
+                Logger.ErrorMessage($"Error occurred during file operations: {ioEx.Message}");
             }
             catch (UnauthorizedAccessException unAuthEx)
             {
@@ -94,37 +93,29 @@ namespace test1
             }
             catch (Exception ex)
             {
-                Logger.ErrorMessage($"Unexpected error ocurred: {ex.Message}");
+                Logger.ErrorMessage($"Unexpected error occurred: {ex.Message}");
             }
         }
 
         public void SaveWordCSV(string word, string translation)
         {
-            Dictionary<string, string> tmp = new Dictionary<string, string>();
-            tmp.Add(word, translation);
-
-            StreamWriter writer;
-            CsvWriter csvWriter;
-            CsvConfiguration config = new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                HasHeaderRecord = false,
-            };
-
             try
             {
-                using (writer = new StreamWriter(directoryPath, true, new System.Text.UTF8Encoding(true)))
+                using (var writer = new StreamWriter(filePath, append: true, Encoding.UTF8))
                 {
-                    using (csvWriter = new CsvWriter(writer, config))
+                    var settings = new CSVSettings()
                     {
-                        csvWriter.WriteRecords(tmp);
-                    }
+                        FieldDelimiter = ';'
+                    };
+                    var csv = new CSVWriter(writer, settings);
+                    csv.WriteLine(new[] { word, translation });
                 }
 
                 Logger.SuccessMessage($"Added new word {word} -- {translation}.");
             }
             catch (IOException ioEx)
             {
-                Logger.ErrorMessage($"Error occured during the writing word to file: {ioEx.Message}");
+                Logger.ErrorMessage($"Error occurred during writing word to file: {ioEx.Message}");
             }
             catch (UnauthorizedAccessException unAuthEx)
             {
@@ -132,9 +123,8 @@ namespace test1
             }
             catch (Exception ex)
             {
-                Logger.ErrorMessage($"Unexpected error ocurred: {ex.Message}");
+                Logger.ErrorMessage($"Unexpected error occurred: {ex.Message}");
             }
         }
-
     }
 }
