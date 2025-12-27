@@ -99,32 +99,17 @@ namespace test1
 
         public void SaveWordCSV(string word, string translation)
         {
-            try
+            using (var writer = new StreamWriter(filePath, append: true, Encoding.UTF8))
             {
-                using (var writer = new StreamWriter(filePath, append: true, Encoding.UTF8))
+                var settings = new CSVSettings()
                 {
-                    var settings = new CSVSettings()
-                    {
-                        FieldDelimiter = ';'
-                    };
-                    var csv = new CSVWriter(writer, settings);
-                    csv.WriteLine(new[] { word, translation });
-                }
+                    FieldDelimiter = ';'
+                };
+                var csv = new CSVWriter(writer, settings);
+                csv.WriteLine(new[] { word, translation });
+            }
 
-                Logger.SuccessMessage($"Added new word {word} -- {translation}.");
-            }
-            catch (IOException ioEx)
-            {
-                Logger.ErrorMessage($"Error occurred during writing word to file: {ioEx.Message}");
-            }
-            catch (UnauthorizedAccessException unAuthEx)
-            {
-                Logger.ErrorMessage($"Access to the file is denied: {unAuthEx.Message}");
-            }
-            catch (Exception ex)
-            {
-                Logger.ErrorMessage($"Unexpected error occurred: {ex.Message}");
-            }
+            Logger.SuccessMessage($"Added new word {word} -- {translation}.");
         }
     }
 }

@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 
 namespace test1
@@ -31,14 +32,14 @@ namespace test1
 
                 if (ChromeInstance.FindElements(By.TagName("h4")).Count != 0)
                 {
-                    Logger.InfoMessage("Todays session already completed. Skipping user...");
+                    Logger.LogInfoFile("Todays session already completed. Skipping user...", User.Login);
                     return;
                 }
 
                 IWebElement startSessionButton = ChromeInstance.FindElement(By.ClassName("btn-start-session"));
                 startSessionButton.Click();
 
-                Logger.InfoMessage("Session started.");
+                Logger.LogInfoFile("Session started.", User.Login);
 
                 Wait(Interval);
 
@@ -57,7 +58,7 @@ namespace test1
                 bool synonym = false;
 
 
-                Logger.SuccessMessage("All DOM elements found.");
+                Logger.LogSuccessFile("All DOM elements found.", User.Login);
 
 
                 while (!ChromeInstance.FindElement(By.Id("return_mainpage")).Displayed)
@@ -65,7 +66,7 @@ namespace test1
 
                     if (ChromeInstance.FindElement(By.Id("new_word_form")).Displayed)
                     {
-                        Logger.InfoMessage("LEARN new word site spotted and skipped.");
+                        Logger.LogInfoFile("LEARN new word site spotted and skipped.", User.Login);
 
                         ChromeInstance.FindElement(By.Id("know_new")).Click();
 
@@ -82,7 +83,7 @@ namespace test1
 
                     if (Answers.ContainsKey(dictionaryKey))
                     {
-                        Logger.InfoMessage($"KNOWN word: {dictionaryKey} spotted. Trying to complete it...");
+                        Logger.LogInfoFile($"KNOWN word: {dictionaryKey} spotted. Trying to complete it...", User.Login);
 
                         dictionaryValue = Answers[dictionaryKey];
                         answerInput.SendKeys(dictionaryValue);
@@ -97,37 +98,49 @@ namespace test1
 
                             if (synonym)
                             {
-                                Logger.ErrorMessage($"Synonym temporarily changed to the word provided by installing: {Answers[dictionaryKey]}.");
+                                Logger.ErrorMessage($"Synonym temporarily changed to the word provided by installing: {Answers[dictionaryKey]}.", User.Login);
                             }
                             else
                             {
-                                Logger.ErrorMessage($"Provided word was incorrect. Temporarily changing word to the one provided by installing: {Answers[dictionaryKey]}.");
+                                Logger.ErrorMessage($"Provided word was incorrect. Temporarily changing word to the one provided by installing: {Answers[dictionaryKey]}.", User.Login);
                             }
                         }
                         else if(ChromeInstance.FindElements(By.ClassName("blue")).Count > 0)
                         {
                             Answers[dictionaryKey] = "@SYNONYM@";
 
-                            Logger.InfoMessage("Saved word was a synonym. Word changed to incorrect one to get correct translation from installing.");
+                            Logger.LogInfoFile("Saved word was a synonym. Word changed to incorrect one to get correct translation from installing.", User.Login);
                         }
                         else
                         {
-                            Logger.SuccessMessage("Word solved.");
+                            Logger.LogSuccessFile("Word solved.", User.Login);
                         }
 
                         nextWordButton.Click();
                     }
                     else
                     {
-                        Logger.InfoMessage($"Unknown word: {dictionaryKey} spotted. Saving word...");
+                        Logger.LogInfoFile($"Unknown word: {dictionaryKey} spotted. Saving word...", User.Login);
 
                         submitAnswerButton.Click();
 
                         Wait(Interval);
+                        
+                        try
+                        {
+                            dictionaryValue = ChromeInstance.FindElement(By.Id("word")).Text;
+                            Answers.Add(dictionaryKey, dictionaryValue);
+                            DictionaryInstance.SaveWordCSV(dictionaryKey, dictionaryValue);
+                        }
+                        catch (IOException ioEx)
+                        {
+                            Logger.ErrorMessage($"Error occurred during writing word to file: {ioEx.Message}", User.Login);
+                        }
+                        catch (UnauthorizedAccessException unAuthEx)
+                        {
+                            Logger.ErrorMessage($"Access to the file is denied: {unAuthEx.Message}", User.Login);
+                        }
 
-                        dictionaryValue = ChromeInstance.FindElement(By.Id("word")).Text;
-                        Answers.Add(dictionaryKey, dictionaryValue);
-                        DictionaryInstance.SaveWordCSV(dictionaryKey, dictionaryValue);
 
                         nextWordButton.Click();
                     }
@@ -146,7 +159,7 @@ namespace test1
             }
             catch (Exception ex)
             {
-                Logger.ErrorMessage("An error occurred during the quiz process: " + ex.Message);
+                Logger.ErrorMessage("An error occurred during the quiz process: " + ex.Message, User.Login);
             }
             finally
             {
@@ -173,11 +186,11 @@ namespace test1
                 ChromeInstance = new ChromeDriver(serviceOptions, browserOptions);
                 ChromeInstance.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
 
-                Logger.SuccessMessage("Created chrome instance.");
+                Logger.LogSuccessFile("Created chrome instance.", User.Login);
             }
             catch (Exception ex)
             {
-                Logger.ErrorMessage("Failed to initialize ChromeDriver: " + ex.Message);
+                Logger.ErrorMessage("Failed to initialize ChromeDriver: " + ex.Message, User.Login);
                 throw;
             }
         }
@@ -216,7 +229,7 @@ namespace test1
                     }
                     else
                     {
-                        Logger.SuccessMessage($"User {User.Login} logged in.");
+                        Logger.LogSuccessFile($"User {User.Login} logged in.", User.Login);
                     }
                 }
                 else if (!ChromeInstance.Url.Contains("https://instaling.pl/student/pages/mainPage.php?student_id="))
@@ -226,11 +239,11 @@ namespace test1
             }
             catch (NoSuchElementException ex)
             {
-                Logger.ErrorMessage("Error during login: Element not found. " + ex.Message);
+                Logger.ErrorMessage("Error during login: Element not found. " + ex.Message, User.Login);
             }
             catch (Exception ex)
             {
-                Logger.ErrorMessage("An error occurred during login: " + ex.Message);
+                Logger.ErrorMessage("An error occurred during login: " + ex.Message, User.Login);
             }
         }
 
